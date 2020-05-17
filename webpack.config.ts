@@ -1,11 +1,12 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const sourcePath = path.resolve(__dirname, 'src');
 
-module.exports = (env) => ({
+module.exports = {
   mode: 'development',
+  devtool: 'source-map',
   entry: './src/index.tsx',
   module: {
     rules: [
@@ -13,6 +14,14 @@ module.exports = (env) => ({
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.(css|scss)$/,
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader?url=false'
+        ]
       }
     ]
   },
@@ -27,15 +36,13 @@ module.exports = (env) => ({
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.APP_ENV': JSON.stringify(env)
-    }),
     new HtmlWebPackPlugin({
       template: './public/index.html',
       filename: 'index.html'
-    })
+    }),
+    new MiniCssExtractPlugin()
   ],
   devServer: {
     historyApiFallback: true
   }
-})
+}
