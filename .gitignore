@@ -2,7 +2,6 @@
 
 # folders
 .idea
-/dist
 
 # dependencies
 /node_modules
