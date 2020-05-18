@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import { Layout, Menu, Typography } from 'antd';
+import 'antd/dist/antd.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const { Header, Footer, Content } = Layout;
 
-export default App;
+export const App = () => (
+  <Layout style={{ height: '100vh' }}>
+    <Header>
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['0']}>
+        <Menu.Item key="0">
+          ZH Solutions
+        </Menu.Item>
+      </Menu>
+    </Header>
+    <Content>Content</Content>
+    <Footer>Footer</Footer>
+  </Layout>
+)
